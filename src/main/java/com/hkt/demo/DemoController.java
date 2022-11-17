@@ -7,10 +7,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class DemoController {
 
-    @Value("${app-name}")
-    private String appName;
+    @Value("${envVar}")
+    private String envVar;
+
+    @Value("${configMapVar}")
+    private String configMapVar;
+
+    @Value("${secretVar}")
+    private String secretVar;
     @GetMapping("/healthcheck")
     public String healthcheck() {
-        return appName + " is ok.";
+
+        String message = "Get Value from secret or configMap.<br/><br/>" +
+                "Environment Variable:" + envVar + "<br/>" +
+                "ConfigMap Variable:" + configMapVar + "<br/>" +
+                "Secret Variable:" + secretVar;
+
+        return message;
     }
 }
